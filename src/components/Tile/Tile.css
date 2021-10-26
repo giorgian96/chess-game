@@ -1,0 +1,32 @@
+.tile{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 75px;
+  height: 75px;
+}
+
+.tile.colored{
+  background-color: #613d3d;
+}
+
+.tile.uncolored{
+  background-color: #f3ddce;
+}
+
+.top-left-rounded{
+  border-top-left-radius: 10px;
+}
+
+.top-right-rounded{
+  border-top-right-radius: 10px;
+}
+
+.bottom-left-rounded{
+  border-bottom-left-radius: 10px;
+}
+
+.bottom-right-rounded{
+  border-bottom-right-radius: 10px;
+}
