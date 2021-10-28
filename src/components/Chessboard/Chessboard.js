@@ -1,4 +1,3 @@
-import React from 'react'
 import Tile from '../Tile/Tile'
 import './Chessboard.css'
 import { VERTICAL_AXIS, HORIZONTAL_AXIS } from '../../config/chessboard-config'
