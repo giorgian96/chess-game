@@ -1,6 +1,11 @@
 import Tile from '../Tile/Tile'
 import './Chessboard.css'
-import { VERTICAL_AXIS, HORIZONTAL_AXIS } from '../../config/chessboard-config'
+import { 
+  VERTICAL_AXIS, 
+  HORIZONTAL_AXIS,
+  INITIAL_GAME
+} from '../../config/chessboard-config'
+import { drawPiecesService } from '../../services/drawPiecesService'
 
 const Chessboard = () => {
   let board = [];
@@ -11,8 +16,9 @@ const Chessboard = () => {
       board.push(
         <Tile 
           key={`${HORIZONTAL_AXIS[i]}${VERTICAL_AXIS[j]}`} 
-          isColored={colorCounter % 2 !== 0} 
-          coordinate={`${HORIZONTAL_AXIS[i]}${VERTICAL_AXIS[j]}`} />
+          isDark={colorCounter % 2 !== 0} 
+          coordinate={`${HORIZONTAL_AXIS[i]}${VERTICAL_AXIS[j]}`}
+          pieceImage={drawPiecesService.getPieceImageLocation(`${HORIZONTAL_AXIS[i]}${VERTICAL_AXIS[j]}`, INITIAL_GAME)} />
       );
       colorCounter++;
     }
