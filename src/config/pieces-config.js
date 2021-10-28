@@ -12,3 +12,12 @@ export const PIECES_IMAGES = {
   whiteQueen: 'images/white-queen.svg',
   whiteRook: 'images/white-rook.svg'
 }
+
+export const PIECE_MOVEMENT_METHODS = {
+  pawn: "pawnMovement",
+  knight: "knightMovement",
+  rook: "rookMovement",
+  bishop: "bishopMovement",
+  queen: "queenMovement",
+  king: "kingMovement"
+}

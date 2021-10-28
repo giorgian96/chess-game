@@ -1,24 +1,39 @@
+import { useState } from 'react'
 import Tile from '../Tile/Tile'
 import './Chessboard.css'
 import { 
   VERTICAL_AXIS, 
   HORIZONTAL_AXIS,
-  INITIAL_GAME
+  currentGame
 } from '../../config/chessboard-config'
-import { drawPiecesService } from '../../services/drawPiecesService'
+import { pieceService } from '../../services/pieceService'
 
 const Chessboard = () => {
-  let board = [];
+  let tiles = [];
   let colorCounter = 0;
+  const [selectedTile, setSelectedTile] = useState('');
 
   for (let j = VERTICAL_AXIS.length - 1; j >= 0; j--) {
     for (let i = 0; i < HORIZONTAL_AXIS.length; i++) {
-      board.push(
+      let coord = `${HORIZONTAL_AXIS[i]}${VERTICAL_AXIS[j]}`;
+
+      tiles.push(
         <Tile 
           key={`${HORIZONTAL_AXIS[i]}${VERTICAL_AXIS[j]}`} 
           isDark={colorCounter % 2 !== 0} 
-          coordinate={`${HORIZONTAL_AXIS[i]}${VERTICAL_AXIS[j]}`}
-          pieceImage={drawPiecesService.getPieceImageLocation(`${HORIZONTAL_AXIS[i]}${VERTICAL_AXIS[j]}`, INITIAL_GAME)} />
+          isSelected={coord === selectedTile}
+          movementPossible={Math.random() > 0.9}
+          coordinate={coord}
+          piece={pieceService.getPiece(coord, currentGame)}
+          pieceImage={pieceService.getPieceImageLocation(coord, currentGame)}
+          onTileClick={(piece, coordinate) => {
+            let result = pieceService.handlePieceClick(piece, coordinate);
+            if(result){
+              setSelectedTile(result.coordinate);
+            }else{
+              setSelectedTile('');
+            }
+          }} />
       );
       colorCounter++;
     }
@@ -27,7 +42,7 @@ const Chessboard = () => {
 
   return (
     <div id="chessboard">
-      {board}
+      {tiles}
     </div>
   )
 }

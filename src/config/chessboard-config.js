@@ -35,4 +35,28 @@ export const INITIAL_GAME = {
   f1: "whiteBishop",
   g1: "whiteKnight",
   h1: "whiteRook"
-}
+};
+
+export let currentGame = {...INITIAL_GAME};
+
+export const LETTER_TO_NUMBER = {
+  a: 1,
+  b: 2,
+  c: 3,
+  d: 4,
+  e: 5,
+  f: 6,
+  g: 7,
+  h: 8
+};
+
+export const NUMBER_TO_LETTER = {
+  1: 'a',
+  2: 'b',
+  3: 'c',
+  4: 'd',
+  5: 'e',
+  6: 'f',
+  7: 'g',
+  8: 'h'
+};

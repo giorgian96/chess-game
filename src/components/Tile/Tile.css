@@ -15,6 +15,27 @@
   background-color: #f3ddce;
 }
 
+.tile.move{
+  background-color: midnightblue;
+  border: 1px outset #f3ddce;
+}
+
+.tile.selected{
+  background-color: green;
+}
+
+.tile.has-piece:hover{
+  background-color: gold;
+}
+
+.tile.selected:hover{
+  background-color: green;
+}
+
+.tile.move:hover{
+  background-color: midnightblue;
+}
+
 .top-left-rounded{
   border-top-left-radius: 10px;
 }
