@@ -5,13 +5,16 @@ import {
   NUMBER_TO_LETTER
 } from "../../config/chessboard-config";
 
-export const rook = {
-  rookMovement(piece, coordinate, gameState) {
+export const bishop = {
+  bishopMovement(piece, coordinate, gameState){
     let possibleMovement = [];
 
-    // Verify right
-    for (let x = (LETTER_TO_NUMBER[coordinate[0]] + 1); x <= HORIZONTAL_AXIS.length; x++) {
-      let currentCoord = `${NUMBER_TO_LETTER[x]}${coordinate[1]}`;
+    // Verify right and up
+    let x = (LETTER_TO_NUMBER[coordinate[0]]) + 1;
+    let y = parseInt(coordinate[1]) + 1;
+
+    while(x <= HORIZONTAL_AXIS.length && y <= VERTICAL_AXIS.length){
+      let currentCoord = `${NUMBER_TO_LETTER[x]}${y}`;
 
       if (gameState[currentCoord] === undefined) {
         // If there is no piece on this tile, it is a possible move
@@ -24,11 +27,17 @@ export const rook = {
         // If the piece on this tile is the same color, we cannot continue
         break;
       }
+
+      x++;
+      y++;
     }
 
-    // Verify left
-    for(let x = (LETTER_TO_NUMBER[coordinate[0]] - 1); x >= 1; x--){
-      let currentCoord = `${NUMBER_TO_LETTER[x]}${coordinate[1]}`;
+    // Verify right and down
+    x = (LETTER_TO_NUMBER[coordinate[0]]) + 1;
+    y = parseInt(coordinate[1]) - 1;
+
+    while(x <= HORIZONTAL_AXIS.length && y >= 1){
+      let currentCoord = `${NUMBER_TO_LETTER[x]}${y}`;
 
       if (gameState[currentCoord] === undefined) {
         // If there is no piece on this tile, it is a possible move
@@ -41,11 +50,17 @@ export const rook = {
         // If the piece on this tile is the same color, we cannot continue
         break;
       }
+
+      x++;
+      y--;
     }
 
-    // Verify up
-    for(let y = (parseInt(coordinate[1]) + 1); y <= VERTICAL_AXIS.length; y++){
-      let currentCoord = `${coordinate[0]}${y}`;
+    // Verify left and up
+    x = (LETTER_TO_NUMBER[coordinate[0]]) - 1;
+    y = parseInt(coordinate[1]) + 1;
+
+    while(x >= 1 && y <= VERTICAL_AXIS.length){
+      let currentCoord = `${NUMBER_TO_LETTER[x]}${y}`;
 
       if (gameState[currentCoord] === undefined) {
         // If there is no piece on this tile, it is a possible move
@@ -58,11 +73,17 @@ export const rook = {
         // If the piece on this tile is the same color, we cannot continue
         break;
       }
+
+      x--;
+      y++;
     }
 
-    // Verify down
-    for(let y = (coordinate[1] - 1); y >= 1; y--){
-      let currentCoord = `${coordinate[0]}${y}`;
+    // Verify left and down
+    x = (LETTER_TO_NUMBER[coordinate[0]]) - 1;
+    y = parseInt(coordinate[1]) - 1;
+
+    while(x >= 1 && y >= 1){
+      let currentCoord = `${NUMBER_TO_LETTER[x]}${y}`;
 
       if (gameState[currentCoord] === undefined) {
         // If there is no piece on this tile, it is a possible move
@@ -75,6 +96,9 @@ export const rook = {
         // If the piece on this tile is the same color, we cannot continue
         break;
       }
+
+      x--;
+      y--;
     }
 
     return possibleMovement;

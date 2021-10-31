@@ -37,8 +37,6 @@ export const INITIAL_GAME = {
   h1: "whiteRook"
 };
 
-export let currentGame = {...INITIAL_GAME};
-
 export const LETTER_TO_NUMBER = {
   a: 1,
   b: 2,
