@@ -34,7 +34,7 @@ export const pieceService = {
     if(piece && playerTurnService.isWrongTurn(piece)){
       // Check if we already have a piece selected
       if (this.selectedPiece.piece && Object.keys(this.selectedPiece.piece).length > 0){
-        // Do nothing
+        // Do nothing, we already have a piece selected, so this is an attack
       }else{
         // Wrong turn, stop execution
         return null;
