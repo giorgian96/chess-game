@@ -20,6 +20,10 @@
   box-shadow: inset 0px 0px 20px 0px rgba(0, 0, 0, 0.65);
 }
 
+.tile.has-piece.move{
+  background-color: #ff3d2f;
+}
+
 .tile.selected{
   background-color: green;
 }
@@ -35,6 +39,10 @@
 .tile.move:hover{
   background-color: #00aeff;
   cursor: pointer;
+}
+
+.tile.has-piece.move:hover{
+  background-color: #ff3d2f;
 }
 
 .top-left-rounded{
