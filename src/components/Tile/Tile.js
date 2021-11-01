@@ -13,8 +13,8 @@ const Tile = (props) => {
       (props.isDark ? "dark " : "light ") +
       tileService.getTileRoundedClass(props.coordinate) +
       (img ? " has-piece " : "") +
-      (props.isSelected ? "selected" : "") +
-      (props.movementPossible ? "move" : "")
+      (props.isSelected ? " selected " : "") +
+      (props.movementPossible ? " move " : "")
     } onClick={() => props.onTileClick(props.piece, props.coordinate)} >
       {img}
     </div>

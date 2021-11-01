@@ -6,7 +6,7 @@ import { queen } from './pieces/queen'
 import { rook } from './pieces/rook'
 
 export const movementService = {
-  movePiece(oldCoordinate, newCoordinate, gameState){
+  movePiece(oldCoordinate, newCoordinate, gameState) {
     let pieceName = gameState[oldCoordinate];
     gameState[newCoordinate] = pieceName;
     delete gameState[oldCoordinate];

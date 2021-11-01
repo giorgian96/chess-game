@@ -31,11 +31,11 @@ export const pieceService = {
 
   handlePieceClick(piece, coordinate, gameState) {
     // Check player turn
-    if(piece && playerTurnService.isWrongTurn(piece)){
+    if (piece && playerTurnService.isWrongTurn(piece)) {
       // Check if we already have a piece selected
-      if (this.selectedPiece.piece && Object.keys(this.selectedPiece.piece).length > 0){
+      if (this.selectedPiece.piece && Object.keys(this.selectedPiece.piece).length > 0) {
         // Do nothing, we already have a piece selected, so this is an attack
-      }else{
+      } else {
         // Wrong turn, stop execution
         return null;
       }
@@ -60,7 +60,11 @@ export const pieceService = {
         // If we clicked on a different tile, check if we can move the piece to this coordinate
         let result = this.handlePieceMovement(this.selectedPiece.piece, this.selectedPiece.coordinate, coordinate, gameState);
 
+        let promotionAvailable;
         if (result.success) {
+          // See if we can promote a pawn
+          promotionAvailable = this.verifyForPawnPromotion(coordinate, result.gameState);
+
           // Now that the piece is moved, we can clear the selection
           this.selectedPiece = {
             piece: {},
@@ -78,7 +82,8 @@ export const pieceService = {
         return {
           selectedTile: this.selectedPiece.coordinate,
           movementTiles: this.selectedPiece.movementTiles,
-          gameState
+          gameState,
+          promotionAvailable
         }
       }
     } else {
@@ -104,7 +109,7 @@ export const pieceService = {
     }
   },
 
-  getPossibleMovement(piece, coordinate, gameState){
+  getPossibleMovement(piece, coordinate, gameState) {
     let result = movementService[PIECE_MOVEMENT_METHODS[piece.type]](
       piece,
       coordinate,
@@ -118,7 +123,7 @@ export const pieceService = {
     let result = this.getPossibleMovement(piece, oldCoordinate, gameState);
     let success = result.includes(newCoordinate);
 
-    if(success){
+    if (success) {
       // Move the piece and get the new gamestate
       gameState = movementService.movePiece(oldCoordinate, newCoordinate, gameState);
     }
@@ -127,5 +132,37 @@ export const pieceService = {
       success,
       gameState
     }
+  },
+
+  verifyForPawnPromotion(newCoordinate, gameState) {
+    // Verify for pawn promotion
+    let pieceName = gameState[newCoordinate];
+    let promotionAvailable = {};
+    if (pieceName.includes("Pawn")) {
+      if (pieceName.includes("black")) {
+        if (parseInt(newCoordinate[1]) === 1) {
+          // Pawn can be promoted
+          promotionAvailable = {
+            pieceName,
+            newCoordinate
+          }
+        }
+      } else if (pieceName.includes("white")) {
+        if (parseInt(newCoordinate[1]) === 8) {
+          // Pawn can be promoted
+          promotionAvailable = {
+            pieceName,
+            newCoordinate
+          }
+        }
+      }
+    }
+
+    return promotionAvailable;
+  },
+
+  handlePawnPromotion(coordinate, pieceName, gameState){
+    gameState[coordinate] = pieceName;  
+    return gameState;
   }
 }
